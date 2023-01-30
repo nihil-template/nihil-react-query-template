@@ -9,12 +9,13 @@ import { getTodo } from '@/data/queries';
 import { setMetaData } from '@/data/setMetaData';
 import { appData } from '@/data/appData';
 
-export function TestDetailPage() {
+export function TodoDetailPage() {
   const { id, } = useParams();
   const {
     isLoading, isError, error, data,
   } = useQuery<ITodo, Error>([ 'getTodo', id, ], () => getTodo(id));
   // 게시글의 상세 페이지 같은 것들은 쿼리 키를 배열로 두어 식별 장치를 여러개로 만들어놔야한다.
+  // 쿼리 함수에는
 
   const meta = setMetaData({
     url: `/todos/${id}`,

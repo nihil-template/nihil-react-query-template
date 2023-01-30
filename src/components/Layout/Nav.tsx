@@ -6,7 +6,7 @@ export function Nav() {
     <>
       <nav>
         <Link to='/'>홈</Link>
-        <Link to='/test'>테스트</Link>
+        <Link to='/users'>유저 목록</Link>
       </nav>
     </>
   );

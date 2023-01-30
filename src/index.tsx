@@ -4,9 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { HomePage } from './pages';
-import { TestDetailPage } from './pages/TestDetailPage';
+import { TodoDetailPage } from './pages/TodoDetailPage';
 
 import '@/styles/tailwind.css';
+import { UsersPage } from './pages/UsersPage';
 
 const queryClient = new QueryClient();
 
@@ -15,7 +16,8 @@ const ReduxApp = (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/todos/:id' element={<TestDetailPage />} />
+        <Route path='/todos/:id' element={<TodoDetailPage />} />
+        <Route path='/users' element={<UsersPage />} />
       </Routes>
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />

@@ -21,21 +21,30 @@ export function HomePage() {
     url: '/',
   });
 
+  if (isLoading) {
+    return (
+      <div>로딩중</div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div>{error.message}</div>
+    );
+  }
+
   return (
     <>
       <AppLayout meta={meta}>
-        {isLoading && <div>로딩중</div>}
-        {isError && <div>{error.message}</div>}
-
         <div>
           <h1>홈</h1>
 
-          <h2>테스트 리스트</h2>
+          <h2>투두리스트</h2>
           <div>
-            {data?.map((item) => (
-              <div key={item.id}>
-                <span css={noStyle}>{item.id}</span>
-                <Link to={`/todos/${item.id}`}>[ {item.title} ]</Link>
+            {data?.map((todo) => (
+              <div key={todo.id}>
+                <span css={noStyle}>{todo.id}</span>
+                <Link to={`/todos/${todo.id}`}>[ {todo.title} ]</Link>
               </div>
             ))}
           </div>
