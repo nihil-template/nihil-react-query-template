@@ -2,10 +2,9 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import tw, { css } from 'twin.macro';
-import { AppLayout } from '@/layouts/AppLayout';
 import { getTodos } from '@/data/queries';
 import { ITodo } from '@/types/todos.types';
-import { setMetaData } from '@/data/setMetaData';
+import { AppLayout } from '@/layouts';
 
 export function HomePage() {
   const {
@@ -16,26 +15,30 @@ export function HomePage() {
     ${tw` mr-2 text-[1.2rem] p-2 bg-blue-500 inline-block rounded-1 text-black-50 `}
   `;
 
-  const meta = setMetaData({
-    title: 'Home',
-    url: '/',
-  });
+  const url = '/';
 
   if (isLoading) {
     return (
-      <div>로딩중</div>
+      <AppLayout title='로딩중...' url={url}>
+        <div>로딩중</div>
+      </AppLayout>
     );
   }
 
   if (isError) {
     return (
-      <div>{error.message}</div>
+      <AppLayout title={`에러 - ${error.message}`} url={url}>
+        <div>{error.message}</div>
+      </AppLayout>
     );
   }
 
   return (
     <>
-      <AppLayout meta={meta}>
+      <AppLayout
+        title='홈'
+        url='/'
+      >
         <div>
           <h1>홈</h1>
 

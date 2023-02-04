@@ -1,19 +1,28 @@
 import React from 'react';
 import {
-  Footer, Header, Main, Nav
+  Footer, Header, Main, Meta, Nav
 } from '@/components/Layout';
-import { IMetaData } from '@/types/site.types';
-import { Meta } from '@/components/Layout/Meta';
+import { IAppLayoutProps, IMetaData } from '@/types/site.types';
 
-interface ILayout {
-  children: React.ReactNode;
-  meta?: IMetaData;
-}
-
-export function AppLayout({ children, meta, }: ILayout) {
+export const AppLayout = ({
+  children, title, url, description, keywords, author, image, created, updated, tags, type, section,
+}: IAppLayoutProps) => {
+  const meta: IMetaData = {
+    title,
+    url,
+    description,
+    keywords,
+    author,
+    image,
+    tags,
+    type,
+    section,
+    created,
+    updated,
+  };
   return (
     <>
-      {meta && <Meta meta={meta} />}
+      <Meta meta={meta} />
       <Header />
       <Nav />
 
@@ -24,4 +33,4 @@ export function AppLayout({ children, meta, }: ILayout) {
       <Footer />
     </>
   );
-}
+};

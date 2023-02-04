@@ -9,21 +9,27 @@ export function UsersPage() {
     isLoading, isError, error, data,
   } = useQuery<IUser[], Error>([ 'getUsers', ], getUsers);
 
+  const url = '/users';
+
   if (isLoading) {
     return (
-      <div>로딩중...</div>
+      <AppLayout title='로딩중...' url={url}>
+        <div>로딩중</div>
+      </AppLayout>
     );
   }
 
   if (isError) {
     return (
-      <div>{error.message}</div>
+      <AppLayout title={`에러 - ${error.message}`} url={url}>
+        <div>{error.message}</div>
+      </AppLayout>
     );
   }
 
   return (
     <>
-      <AppLayout>
+      <AppLayout title='유저 목록' url={url}>
         <div>
           <h1>유저 목록</h1>
 

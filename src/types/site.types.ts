@@ -1,14 +1,16 @@
-export interface IAppData {
-  siteName: string;
-  siteUrl: string;
-  siteImage: string;
-  siteKeywords: string;
-  siteDescription: string;
-  siteType: string;
+export interface ISiteData {
+  title: string;
+  url: string;
+  image: string;
+  keywords: string;
+  description: string;
+  author: string;
+  type: string;
+  version: string;
 }
 
 export interface IMetaData {
-  title?: string;
+  title: string;
   url: string;
   description?: string;
   tags?: string;
@@ -16,6 +18,11 @@ export interface IMetaData {
   image?: string;
   type?: string;
   section?: string;
-  createdAt?: string;
-  updatedAt?: string;
+  author?: string;
+  created?: string;
+  updated?: string;
+}
+
+export interface IAppLayoutProps extends IMetaData {
+  children: React.ReactNode;
 }

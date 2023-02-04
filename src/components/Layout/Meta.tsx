@@ -1,55 +1,61 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { IMetaData } from '@/types/site.types';
-import { appData } from '@/data/appData';
+import { siteData } from '@/data/siteData';
 
 interface IMetaProps {
   meta: IMetaData;
 }
 
 export function Meta({ meta, }: IMetaProps) {
-  const title = `${meta.title} - ${appData.siteName}`;
-  const url = `${appData.siteUrl}${meta.url}`;
-  const image = meta.image ? meta.image : appData.siteImage;
-  const keywords = meta.keywords ? meta.keywords : appData.siteKeywords;
-  const description = meta.description ? meta.description : appData.siteDescription;
-  const type = meta.type ? meta.type : appData.siteType;
+  const {
+    title, url, description, keywords, author,
+    // eslint-disable-next-line no-unused-vars
+    image, type, tags, section, created, updated,
+  } = meta;
+
+  const siteTitle = `${title} - ${siteData.title}`;
+  const siteDescription = description || siteData.description;
+  const siteURL = `${siteData.url}${url}`;
+  const siteKeywords = keywords || siteData.keywords;
+  const siteImage = image || `${siteData.url}${siteData.image}`;
+  const siteType = type || siteData.type;
 
   return (
     <>
       <Helmet>
-        <meta property='og:site_name' content={appData.siteName} />
-        <meta property='og:title' content={title} />
-        <meta property='og:type' content={type} />
-        <meta property='og:description' content={description} />
-        <meta property='og:image' content={image} />
-        <meta property='og:url' content={url} />
+        <meta property='og:site_name' content={siteData.title} />
+        <meta property='og:title' content={siteTitle} />
+        <meta property='og:type' content={siteType} />
+        <meta property='og:description' content={siteDescription} />
+        <meta property='og:image' content={siteImage} />
+        <meta property='og:url' content={siteURL} />
         <meta property='og:locale' content='ko_KR' />
 
-        {type === 'article' && (
+        {siteType === 'article' && (
           <>
             <meta property='article:section' content={meta.section} />
             <meta property='article:tag' content={meta.tags} />
-            <meta property='article:author' content='NIHILncunia' />
-            <meta property='article:published_time' content={meta.createdAt} />
-            <meta property='article:modified_time' content={meta.updatedAt} />
+            <meta property='article:author' content={author} />
+            <meta property='article:published_time' content={meta.created} />
+            <meta property='article:modified_time' content={meta.updated} />
           </>
         )}
 
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:site' content='@NIHILncunia' />
-        <meta name='twitter:creator' content='@NIHILncunia' />
-        <meta name='twitter:title' content={title} />
-        <meta name='twitter:description' content={description} />
-        <meta name='twitter:image' content={image} />
+        <meta name='twitter:site' content={`@${author}`} />
+        <meta name='twitter:creator' content={`@${author}`} />
+        <meta name='twitter:title' content={siteTitle} />
+        <meta name='twitter:description' content={siteDescription} />
+        <meta name='twitter:image' content={siteImage} />
 
-        <meta name='description' content={description} />
-        <meta name='keywords' content={keywords} />
+        <meta name='description' content={siteDescription} />
+        <meta name='keywords' content={siteKeywords} />
         <meta name='generator' content='MS Visual Studio Code' />
-        <meta name='author' content='NIHILncunia' />
-        <link rel='canonical' href={url} />
+        <meta name='author' content={author} />
+        <link rel='canonical' href={siteURL} />
 
-        <title>{title}</title>
+        <title>{siteTitle}</title>
       </Helmet>
     </>
   );
